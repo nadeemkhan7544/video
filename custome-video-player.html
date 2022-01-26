@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+	<title>Custome Video Player</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+		}
+		body{
+			background-image: linear-gradient(to right, #5D6D7E,#566573);
+		}
+		.video_player{
+			width: 100%;
+			height: 50%;
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			/*background-color: red;*/
+		}
+		.video_player video{
+			width: 60%;
+			min-width: 500px;
+			margin-top: 10px;
+			box-shadow: 5px 0px 20px 10px rgba(240, 240,240, 0.5);
+		}
+		.controler{
+			width: 100%;
+			height: 20vh;
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			/*background-color: green;*/
+		}
+
+		.fas{
+			width: 10%;
+			text-align: center;
+		}
+
+	.icon{
+		background:rgba(240, 240, 240, 0.3);
+		color: #fff;
+		border: 1px solid #fff;
+
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		border-radius: 50%;
+		margin: 20px;
+		text-align: center;
+		align-items: center;
+		transition: 0.3s;
+	}
+	#play{
+		background: #ff8A65;
+	}
+	.icon:hover{
+		background: #ff8A65;
+		/*color: #000;*/
+		box-shadow: 1px 1px 10px white;
+		width: 55px;
+		height: 55px;
+		line-height: 55px;
+	}
+	/*.val_range{
+		width: 100%;
+		height: 10vh;
+		line-height: 10vh;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		background-color: yellow;
+	}
+	.val_range h3{
+		width: 50px;
+		height: 50px;
+		border: 1px solid white;
+		line-height: 50px;
+		margin-top: 8px;
+	}
+	.val_range i{
+		width: 50px;
+		height: 50px;
+		border: 1px solid white;
+		line-height: 50px;
+		margin-top: 8px;
+	}*/
+	
+	</style>
+</head>
+<body>
+
+
+			<div class="video_player">
+				<video src="Gal.mp4" id="myvideo" autoplay controls></video>
+			</div>
+
+			<div class="controler">
+
+			<i class="fas fa-volume-down fa-1x  icon" onclick="val_subtract()"></i>
+			<i class="fas fa-step-backward fa-1x icon"  id="prev" onclick="per_video()"></i>
+			<i class="fas fa-play fa-1x icon" id="play"></i>
+			<i class="fas fa-step-forward fa-1x icon" id="next" onclick="nxt_video()"></i>
+			<i class="fas fa-volume-up  fa-1x  icon" onclick="val_plus()"></i>
+
+			</div>
+			<!-- <div class="val_range">
+				<h3>100</h3>
+				<i class="fas fa-volume-up icon2" id="mute"></i>
+				<input type="range" min="0" max="100" value="100">
+			</div> -->
+			
+
+		<script type="text/javascript">
+		let my_video = ["royega.mp4","Bhula.mp4","Gal.mp4"];
+		let i = 0;
+		let j = 0;
+
+		let volume = document.getElementById("mute");
+		let video = document.getElementById("myvideo");
+		let play = document.getElementById("play");
+		
+
+
+		
+			play.addEventListener("click", function(){
+  				if(video.paused){
+   					video.play();
+   					play.classList.replace("fa-play","fa-pause");
+ 				} else {
+   					video.pause();
+   					play.classList.replace("fa-pause","fa-play");
+  				}
+				});
+
+			volume.addEventListener("click", function(){
+  				if(video.muted==false){
+   					video.muted=true;
+   					volume.classList.replace("fa-volume-up","fa-volume-mute");
+ 				} else {
+   					video.muted=false;
+   					volume.classList.replace("fa-volume-mute","fa-volume-up");
+
+  				}
+				});
+
+		function val_plus(){
+			document.getElementById("myvideo").volume+=0.1;
+		}
+		function val_subtract(){
+			document.getElementById("myvideo").volume-=0.1;
+		}
+		function nxt_video(){
+			i = (i + 1) % my_video.length;
+			//  0 + 1 = 1 % 2 = 1  (my_video.length = 2)
+			document.getElementById("myvideo").src = my_video[i];
+			play.classList.replace("fa-play","fa-pause");
+			console.log(i);
+		}
+		function per_video(){
+			j = (j - 1 + my_video.length) % my_video.length;
+			document.getElementById("myvideo").src = my_video[j];
+			play.classList.replace("fa-play","fa-pause");
+			console.log(j);
+		}
+	</script>
+</body>
+</html>
